@@ -1,66 +1,210 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Pastelaria</title>
+</head>
+<body>
+    <h1>Projeto Pastelaria</h1>
+    <h2>Descrição</h2>
+    <p>Projeto de uma API para gerenciamento de uma pastelaria, incluindo funcionalidades para gerenciar clientes, produtos e pedidos.</p>
+    <h2>Requisitos</h2>
+    <ul>
+        <li>Docker</li>
+        <li>Docker Compose</li>
+    </ul>
+    <h2>Configuração do Ambiente</h2>
+    <ol>
+        <li>Clone o repositório:
+            <pre><code>git clone https://github.com/AndersonCBL/pastelaria.git
+cd pastelaria
+            </code></pre>
+        </li>
+        <li>Copie o arquivo <code>.env.example</code> para <code>.env</code> e configure as variáveis de ambiente conforme necessário:
+            <pre><code>cp .env.example .env
+            </code></pre>
+        </li>
+        <li>Suba os containers Docker:
+            <pre><code>docker-compose up -d
+            </code></pre>
+        </li>
+        <li>Instale as dependências do Composer:
+            <pre><code>docker-compose exec app composer install
+            </code></pre>
+        </li>
+        <li>Gere a chave da aplicação:
+            <pre><code>docker-compose exec app php artisan key:generate
+            </code></pre>
+        </li>
+        <li>Execute as migrations e seeders:
+            <pre><code>docker-compose exec app php artisan migrate --seed
+            </code></pre>
+        </li>
+    </ol>
+    <h2>Endpoints da API</h2>
+    <h3>Clientes</h3>
+    <ul>
+        <li><strong>Criar Cliente</strong>
+            <ul>
+                <li>Método: <code>POST</code></li>
+                <li>URL: <code>/api/customers</code></li>
+                <li>Exemplo de Payload:
+                    <pre><code>{
+    "name": "João da Silva",
+    "email": "joao@example.com",
+    "phone": "11999999999",
+    "birth_date": "1990-01-01",
+    "address": "Rua das Flores, 123",
+    "complement": "Apto 45",
+    "neighborhood": "Centro",
+    "cep": "01000-000"
+}
+                    </code></pre>
+                </li>
+            </ul>
+        </li>
+        <li><strong>Listar Clientes</strong>
+            <ul>
+                <li>Método: <code>GET</code></li>
+                <li>URL: <code>/api/customers</code></li>
+            </ul>
+        </li>
+        <li><strong>Atualizar Cliente</strong>
+            <ul>
+                <li>Método: <code>PUT</code></li>
+                <li>URL: <code>/api/customers/{id}</code></li>
+                <li>Exemplo de Payload:
+                    <pre><code>{
+    "name": "João da Silva Atualizado",
+    "email": "joao_atualizado@example.com",
+    "phone": "11988888888",
+    "birth_date": "1990-01-01",
+    "address": "Rua das Flores, 123",
+    "complement": "Apto 45",
+    "neighborhood": "Centro",
+    "cep": "01000-000"
+}
+                    </code></pre>
+                </li>
+            </ul>
+        </li>
+        <li><strong>Excluir Cliente</strong>
+            <ul>
+                <li>Método: <code>DELETE</code></li>
+                <li>URL: <code>/api/customers/{id}</code></li>
+            </ul>
+        </li>
+    </ul>
+    <h3>Produtos</h3>
+    <ul>
+        <li><strong>Criar Produto</strong>
+            <ul>
+                <li>Método: <code>POST</code></li>
+                <li>URL: <code>/api/products</code></li>
+                <li>Exemplo de Payload:
+                    <ul>
+                        <li><code>name</code>: <code>Pastel de Carne</code></li>
+                        <li><code>price</code>: <code>10.50</code></li>
+                        <li><code>photo</code>: Arquivo de imagem</li>
+                        <li><code>product_type_id</code>: ID válido de um tipo de produto</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><strong>Listar Produtos</strong>
+            <ul>
+                <li>Método: <code>GET</code></li>
+                <li>URL: <code>/api/products</code></li>
+            </ul>
+        </li>
+        <li><strong>Atualizar Produto</strong>
+            <ul>
+                <li>Método: <code>PUT</code></li>
+                <li>URL: <code>/api/products/{id}</code></li>
+                <li>Exemplo de Payload:
+                    <ul>
+                        <li><code>name</code>: <code>Pastel de Queijo Atualizado</code></li>
+                        <li><code>price</code>: <code>13.00</code></li>
+                        <li><code>photo</code>: Arquivo de imagem</li>
+                        <li><code>product_type_id</code>: ID válido de um tipo de produto</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><strong>Excluir Produto</strong>
+            <ul>
+                <li>Método: <code>DELETE</code></li>
+                <li>URL: <code>/api/products/{id}</code></li>
+            </ul>
+        </li>
+    </ul>
+    <h3>Tipos de Produtos</h3>
+    <ul>
+        <li><strong>Listar Tipos de Produtos</strong>
+            <ul>
+                <li>Método: <code>GET</code></li>
+                <li>URL: <code>/api/product_types</code></li>
+            </ul>
+        </li>
+    </ul>
+    <h3>Pedidos</h3>
+    <ul>
+        <li><strong>Criar Pedido</strong>
+            <ul>
+                <li>Método: <code>POST</code></li>
+                <li>URL: <code>/api/orders</code></li>
+                <li>Exemplo de Payload:
+                    <pre><code>{
+    "customer_id": 1,
+    "product_ids": [1, 2]
+}
+                    </code></pre>
+                </li>
+            </ul>
+        </li>
+        <li><strong>Listar Pedidos</strong>
+            <ul>
+                <li>Método: <code>GET</code></li>
+                <li>URL: <code>/api/orders</code></li>
+            </ul>
+        </li>
+        <li><strong>Atualizar Pedido</strong>
+            <ul>
+                <li>Método: <code>PUT</code></li>
+                <li>URL: <code>/api/orders/{id}</code></li>
+                <li>Exemplo de Payload:
+                    <pre><code>{
+    "product_ids": [1, 3]
+}
+                    </code></pre>
+                </li>
+            </ul>
+        </li>
+        <li><strong>Excluir Pedido</strong>
+            <ul>
+                <li>Método: <code>DELETE</code></li>
+                <li>URL: <code>/api/orders/{id}</code></li>
+            </ul>
+        </li>
+    </ul>
+    <h2>Testes</h2>
+    <p>Para rodar os testes, execute o seguinte comando:</p>
+    <pre><code>docker-compose exec app php artisan test
+    </code></pre>
+    <h2>Acesso ao Mailtrap</h2>
+    <p>Para verificar se o pedido chegou no e-mail, siga os passos abaixo:</p>
+    <ol>
+        <li>Acesse o site do Mailtrap: <a href="https://mailtrap.io">https://mailtrap.io</a></li>
+        <li>Faça login com as seguintes credenciais:
+            <ul>
+                <li><strong>E-mail:</strong> pastelariateste2025@gmail.com</li>
+                <li><strong>Senha:</strong> 12345Teste!</li>
+            </ul>
+        </li>
+        <li>Após fazer login, você será redirecionado para o dashboard do Mailtrap.</li>
+        <li>No dashboard, clique na caixa de entrada (Inbox) que foi criada para este projeto.</li>
+        <li>Você verá uma lista de e-mails recebidos. Clique no e-mail que deseja visualizar para ver os detalhes.</li>
+    </ol>
+</body>
+</html>
